@@ -22,7 +22,7 @@ public class Comida {
     private String titulo;
     private String descricao;
     private String imagem;
-    private String valor;
+    private Integer valor;
 
 
 }
