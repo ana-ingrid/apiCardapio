@@ -1,26 +1,20 @@
-package br.com.cardapio.model;
+package br.com.cardapio.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "comidas")
-@Table
-public class Comida {
+@NoArgsConstructor
+public class CadastraComidaDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
     private String titulo;
     private String descricao;
     private String imagem;
+
     private Integer valor;
 
 
