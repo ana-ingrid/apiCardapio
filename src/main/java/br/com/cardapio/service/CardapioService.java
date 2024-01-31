@@ -1,7 +1,7 @@
 package br.com.cardapio.service;
 
 import br.com.cardapio.dto.CadastraComidaDTO;
-import br.com.cardapio.exception.ComidaExistenteException;
+import br.com.cardapio.exception.RecursoExistenteException;
 import br.com.cardapio.model.Comida;
 import br.com.cardapio.repository.CardapioRepository;
 import org.modelmapper.ModelMapper;
@@ -25,7 +25,7 @@ public class CardapioService {
             Comida comida = modelMapper.map(cadastraComidaDTO, Comida.class);
             return cardapioRepository.save(comida);
         } else {
-            throw new ComidaExistenteException("Prato já existente");
+            throw new RecursoExistenteException("Prato já existente");
         }
     }
 
