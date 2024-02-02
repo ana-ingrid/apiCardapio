@@ -1,9 +1,11 @@
 package br.com.cardapio.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 @Getter
 @Setter
@@ -11,11 +13,14 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CadastraComidaDTO {
 
+    @NotNull
     private String titulo;
+    @NotNull
     private String descricao;
+    @NotNull
     private String imagem;
-
-    private Integer valor;
+    @NotNull
+    private Double valor;
 
 
 }
