@@ -3,12 +3,12 @@ package br.com.cardapio.resource;
 import br.com.cardapio.dto.CadastraComidaDTO;
 import br.com.cardapio.model.Comida;
 import br.com.cardapio.service.CardapioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/Cardapio")
@@ -19,8 +19,18 @@ public class CardapioController {
 
 
     @PostMapping
-    public ResponseEntity<Comida> cadastraComida(@RequestBody CadastraComidaDTO comidaDTO){
-        return ResponseEntity.ok().body(cardapioService.cadastraComida(comidaDTO));
+    public ResponseEntity<Comida> cadastraComida(@RequestBody @Valid CadastraComidaDTO comidaDTO){
+        return ResponseEntity.status(201).body(cardapioService.cadastraComida(comidaDTO));
+    }
+
+    @GetMapping
+    public  ResponseEntity<Comida> consultaComidaPorTitulo(@RequestParam String titulo){
+        return ResponseEntity.status(200).body(cardapioService.consultaComidaPorTitulo(titulo));
+    }
+
+    @GetMapping(value = "/lista")
+    public ResponseEntity<List<Comida>> listaComidas(){
+        return ResponseEntity.status(200).body(cardapioService.listaComidas());
     }
 
 

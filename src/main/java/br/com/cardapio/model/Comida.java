@@ -18,10 +18,12 @@ public class Comida {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "titulo")
     private String titulo;
     private String descricao;
     private String imagem;
-    private Integer valor;
+    private Double valor;
 
 
 }

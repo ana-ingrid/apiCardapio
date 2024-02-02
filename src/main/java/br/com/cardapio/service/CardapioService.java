@@ -2,6 +2,7 @@ package br.com.cardapio.service;
 
 import br.com.cardapio.dto.CadastraComidaDTO;
 import br.com.cardapio.exception.RecursoExistenteException;
+import br.com.cardapio.exception.RecursoNaoEncontradoException;
 import br.com.cardapio.model.Comida;
 import br.com.cardapio.repository.CardapioRepository;
 import org.modelmapper.ModelMapper;
@@ -19,14 +20,30 @@ public class CardapioService {
     private ModelMapper modelMapper;
 
     public Comida cadastraComida(CadastraComidaDTO cadastraComidaDTO) {
-        List<Comida> comidaList = cardapioRepository.findByTitulo(cadastraComidaDTO.getTitulo());
-
-        if (comidaList.isEmpty()){
+        if (cardapioRepository.findByTituloIgnoreCase(cadastraComidaDTO.getTitulo()) == null){
             Comida comida = modelMapper.map(cadastraComidaDTO, Comida.class);
             return cardapioRepository.save(comida);
         } else {
             throw new RecursoExistenteException("Prato já existente");
         }
     }
+
+    public Comida consultaComidaPorTitulo(String titulo) {
+       if (cardapioRepository.findByTituloIgnoreCase(titulo) == null){
+           throw new RecursoNaoEncontradoException("Prato não encontrado");
+       }
+        return cardapioRepository.findByTituloIgnoreCase(titulo);
+    }
+
+    public List<Comida> listaComidas() {
+        if (cardapioRepository.findAll().isEmpty()) {
+            throw new RecursoNaoEncontradoException("Nenhum prato cadastrado");
+
+        }
+        return cardapioRepository.findAll();
+    }
+
+
+
 
 }
