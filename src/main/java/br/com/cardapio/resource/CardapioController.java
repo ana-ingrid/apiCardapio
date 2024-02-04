@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Cardapio")
+@RequestMapping("/cardapio")
 public class CardapioController {
 
     @Autowired
@@ -31,6 +31,12 @@ public class CardapioController {
     @GetMapping(value = "/lista")
     public ResponseEntity<List<Comida>> listaComidas(){
         return ResponseEntity.status(200).body(cardapioService.listaComidas());
+    }
+
+    @DeleteMapping("/{titulo}")
+    public ResponseEntity<Void> deletaComida(@PathVariable String titulo) {
+        cardapioService.deletaComida(titulo);
+        return ResponseEntity.status(204).build();
     }
 
 
