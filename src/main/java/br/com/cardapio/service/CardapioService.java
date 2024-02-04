@@ -44,6 +44,14 @@ public class CardapioService {
     }
 
 
+    public void deletaComida(String titulo) {
+        Comida comida = cardapioRepository.findByTituloIgnoreCase(titulo);
+
+        if (cardapioRepository.findByTituloIgnoreCase(titulo) == null){
+            throw new RecursoNaoEncontradoException("Prato não encontrado");
+        }
+        cardapioRepository.delete(comida);
+    }
 
 
 }
