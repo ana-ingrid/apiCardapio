@@ -1,5 +1,6 @@
 package br.com.cardapio.resource;
 
+import br.com.cardapio.dto.AlteraComidaDTO;
 import br.com.cardapio.dto.CadastraComidaDTO;
 import br.com.cardapio.model.Comida;
 import br.com.cardapio.service.CardapioService;
@@ -39,5 +40,9 @@ public class CardapioController {
         return ResponseEntity.status(204).build();
     }
 
+    @PutMapping
+    public ResponseEntity<Comida> alteraComida(@RequestBody AlteraComidaDTO comidaDTO, @RequestParam String titulo) {
+        return ResponseEntity.status(200).body(cardapioService.alteraComida(comidaDTO, titulo));
+    }
 
 }
