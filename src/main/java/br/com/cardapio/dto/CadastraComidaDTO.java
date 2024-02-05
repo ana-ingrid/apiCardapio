@@ -13,13 +13,16 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CadastraComidaDTO {
 
-    @NotNull
+    @NotNull(message = "Titulo obrigatório")
     private String titulo;
-    @NotNull
+
+    @NotNull(message = "Descrição obrigatória")
     private String descricao;
-    @NotNull
+
+    @NotNull(message ="Imagem obrigatória")
     private String imagem;
-    @NotNull
+
+    @NotNull(message = "Valor obrigatório")
     private Double valor;
 
 
