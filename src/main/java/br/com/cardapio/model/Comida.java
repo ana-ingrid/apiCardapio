@@ -1,8 +1,6 @@
 package br.com.cardapio.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,11 +16,14 @@ import lombok.Setter;
 public class Comida {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "titulo")
     private String titulo;
     private String descricao;
     private String imagem;
-    private String valor;
+    private Double valor;
 
 
 }
