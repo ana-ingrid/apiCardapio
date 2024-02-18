@@ -67,7 +67,27 @@ import static org.mockito.Mockito.when;
         assertEquals("Prato já existente", exception.getMessage());
     }
 
+    @Test
+    void testconsultaComidaSucesso() {
+        Comida comidaMock = new Comida();
+        comidaMock.setTitulo("Lasanha");
 
+        when(cardapioRepository.findByTituloIgnoreCase(comidaMock.getTitulo())).thenReturn(comidaMock);
+        Comida resultado = cardapioService.consultaComidaPorTitulo(comidaMock.getTitulo());
+
+        assertEquals(comidaMock, resultado);
+    }
+
+    @Test
+    void testconsultaComidaExecption() {
+        when(cardapioRepository.findByTituloIgnoreCase("Lasanha")).thenThrow(new RecursoNaoEncontradoException("Prato não encontrado"));
+
+        RecursoNaoEncontradoException exception = assertThrows(RecursoNaoEncontradoException.class, () -> {
+          cardapioService.consultaComidaPorTitulo("Lasanha");
+        });
+
+        assertEquals("Prato não encontrado", exception.getMessage());
+    }
 
 }
 
