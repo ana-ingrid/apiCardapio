@@ -89,6 +89,5 @@ import static org.mockito.Mockito.when;
         assertEquals("Prato não encontrado", exception.getMessage());
     }
 
-
 }
 
