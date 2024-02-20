@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -20,7 +21,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
- class CardapioServiceTest {
+  class CardapioServiceTest {
 
     @InjectMocks
     private CardapioService cardapioService;
@@ -87,6 +88,31 @@ import static org.mockito.Mockito.when;
         });
 
         assertEquals("Prato não encontrado", exception.getMessage());
+    }
+
+    @Test
+    void testlistaComidasSucesso() {
+        Comida comidaMock = new Comida();
+        comidaMock.setTitulo("Lasanha");
+
+        when(cardapioRepository.findAll()).thenReturn(List.of(comidaMock));
+
+        List<Comida> resultado = cardapioService.listaComidas();
+
+        assertEquals("Lasanha", resultado.get(0).getTitulo());
+
+    }
+
+    @Test
+    void testlistaComidasException() {
+
+        when(cardapioRepository.findAll().isEmpty()).thenThrow(new RecursoNaoEncontradoException("Nenhum prato cadastrado"));
+
+        RecursoNaoEncontradoException exception = assertThrows(RecursoNaoEncontradoException.class, () -> {
+           cardapioService.listaComidas();
+        });
+
+        assertEquals("Nenhum prato cadastrado", exception.getMessage());
     }
 
 
