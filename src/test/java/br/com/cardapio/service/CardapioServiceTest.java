@@ -90,6 +90,7 @@ import static org.mockito.Mockito.when;
         assertEquals("Prato não encontrado", exception.getMessage());
     }
 
+
     @Test
     void testlistaComidasSucesso() {
         Comida comidaMock = new Comida();
