@@ -38,7 +38,7 @@ Esta API oferece funcionalidades para criação, leitura, atualização e exclus
 <br>
 
 <pre><code>
-DB_JDBC_URL=jdbc:mysql://localhost:8080/seu_banco_de_dados
+DB_JDBC_URL=jdbc:mysql://localhost:8081/seu_banco_de_dados
 DB_USER=seu_usuario
 DB_PASSWORD=sua_senha
 </code></pre>
