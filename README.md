@@ -46,3 +46,9 @@ DB_PASSWORD=sua_senha
 <br>
 
 <p>Certifique-se de que as variáveis de ambiente estejam definidas com os valores corretos no seu ambiente de desenvolvimento antes de executar o build do projeto. Essas variáveis permitirão que o projeto se conecte ao banco de dados corretamente durante o processo de build.</p>
+
+<br>
+
+<h2>Diagrama de Classes e Services</h2>
+
+![O diagrama apresenta duas entidades fundamentais para a API de gerenciamento de cardápio: a classe Comida e o serviço CardapioService](images/diagrama.png)
