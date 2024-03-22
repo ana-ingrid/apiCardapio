@@ -11,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AlteraComidaDTO {
 
+    private String titulo;
     private String descricao;
     private String imagem;
     private Double valor;
