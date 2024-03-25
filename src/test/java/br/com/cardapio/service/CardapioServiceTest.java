@@ -1,5 +1,6 @@
 package br.com.cardapio.service;
 
+import br.com.cardapio.dto.AlteraComidaDTO;
 import br.com.cardapio.dto.CadastraComidaDTO;
 import br.com.cardapio.exception.RecursoNaoEncontradoException;
 import br.com.cardapio.model.Comida;
@@ -34,7 +35,7 @@ import static org.mockito.Mockito.when;
 
 
     @Test
-    void testCadastraComidaSucesso() {
+    void testCadastraComidaSucess() {
         CadastraComidaDTO dto = new CadastraComidaDTO();
         dto.setTitulo("Lasanha");
 
@@ -69,7 +70,7 @@ import static org.mockito.Mockito.when;
     }
 
     @Test
-    void testconsultaComidaSucesso() {
+    void testconsultaComidaSucess() {
         Comida comidaMock = new Comida();
         comidaMock.setTitulo("Lasanha");
 
@@ -92,7 +93,7 @@ import static org.mockito.Mockito.when;
 
 
     @Test
-    void testlistaComidasSucesso() {
+    void testlistaComidasSucess() {
         Comida comidaMock = new Comida();
         comidaMock.setTitulo("Lasanha");
 
@@ -116,6 +117,35 @@ import static org.mockito.Mockito.when;
         assertEquals("Nenhum prato cadastrado", exception.getMessage());
     }
 
+    @Test
+    void testAlteraComidaSucess() {
+
+        Comida comidaMock =  new Comida();
+        AlteraComidaDTO comidaDTO = new AlteraComidaDTO();
+        String titulo = "Lasanha";
+
+        when(cardapioRepository.findByTituloIgnoreCase(comidaMock.getTitulo())).thenReturn(comidaMock);
+        when(modelMapper.map(comidaDTO,Comida.class)).thenReturn(comidaMock);
+
+        Comida resultado = cardapioService.alteraComida(comidaDTO,titulo);
+
+        assertEquals(comidaMock, resultado);
+    }
+
+
+    @Test
+    void testAlteraComidaException() {
+
+        String titulo = "lasanha";
+
+        when(cardapioRepository.findByTituloIgnoreCase(titulo)).thenThrow(new RecursoNaoEncontradoException("Prato não encontrado"));
+
+        RecursoNaoEncontradoException exception = assertThrows(RecursoNaoEncontradoException.class, () -> {
+            cardapioService.consultaComidaPorTitulo(titulo);
+        });
+
+        assertEquals("Prato não encontrado", exception.getMessage());
+    }
 
 }
 
