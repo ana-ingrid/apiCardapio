@@ -13,12 +13,11 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -147,5 +146,31 @@ import static org.mockito.Mockito.when;
         assertEquals("Prato não encontrado", exception.getMessage());
     }
 
-}
+    @Test
+    void testDeletaComidaSucess() {
+            String titulo = "Lasanha";
+            Comida comidaMock = new Comida();
+            comidaMock.setTitulo(titulo);
 
+        when(cardapioRepository.findByTituloIgnoreCase(titulo)).thenReturn(comidaMock);
+
+        assertDoesNotThrow(() -> cardapioService.deletaComida(titulo));
+        Mockito.verify(cardapioRepository).delete(comidaMock);
+
+    }
+
+    @Test
+    void testDeletaComidaException() {
+        String titulo = "Lasanha";
+        when(cardapioRepository.findByTituloIgnoreCase(titulo)).thenThrow(new RecursoNaoEncontradoException("Prato não encontrado"));
+
+        RecursoNaoEncontradoException exception = assertThrows(RecursoNaoEncontradoException.class, () -> {
+            cardapioService.deletaComida(titulo);
+        });
+
+        assertEquals("Prato não encontrado", exception.getMessage());
+        Mockito.verify(cardapioRepository, never()).delete(any());
+    }
+
+
+}
