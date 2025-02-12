@@ -1,54 +1,22 @@
-<h1>API de Gerenciamento de Cardápio 🍽️</h1>
-<p>A API de Gerenciamento de Cardápio é uma ferramenta desenvolvida em Java 17 para praticar habilidades de desenvolvimento. Embora seja um projeto de portfólio, foi projetada com a funcionalidade de lidar com as operações básicas (CRUD) dos produtos em um cardápio, com potencial utilidade para restaurantes e estabelecimentos similares. Esta API oferece uma visão prática, demonstrando habilidades técnicas e conhecimentos em desenvolvimento de software.</p>
+## 🔄 Refatoração para GraphQL
 
-<br>
+### Visão Geral
+Este projeto está em processo de refatoração para suportar **GraphQL**, que irá substituir a arquitetura REST existente. A ideia é proporcionar uma maneira mais flexível e eficiente de consultar os dados dos cardápios.
 
-<h2>Descrição:</h2>
-<p>
-Esta API oferece funcionalidades para criação, leitura, atualização e exclusão de produtos em um cardápio. É uma solução eficiente para restaurantes, e similares que precisam gerenciar seus menus de forma organizada.
-</p>
+### O que está sendo alterado:
+- **GraphQL** será adicionado para substituir a comunicação via REST.
+- A lógica de CRUD será reestruturada para utilizar GraphQL.
+- As operações atuais de criação, leitura, atualização e exclusão de produtos serão mantidas, mas agora acessadas via queries e mutations do GraphQL.
 
-<br>
+### Como isso será implementado:
+- Definiremos tipos, queries e mutations para gerenciar produtos no cardápio.
+- A lógica para resolver as queries e mutations será implementada.
 
-<h2>Instalações:</h2>
+### 📝 Passos para o processo:
+1. Criar o **schema GraphQL** com tipos e definições.
+2. Implementar **resolvers** para conectar ao banco de dados.
+3. Testar a integração da API com GraphQL.
+4. Garantir que as APIs REST ainda funcionem enquanto o GraphQL é implementado.
 
-<p>Para utilizar esta API, é necessário ter o Java 17, IDE de preferência e o MySQL instalados em sua máquina.</p>
+📍 **Status Atual:** Por enquanto, a estrutura da API permanece com endpoints REST. Em breve, será possível consultar a API utilizando GraphQL.
 
-<br>
-
-<h2>Configuração Banco de dados:</h2>
-
-<ol>
-    <li>Baixe e instale o MySQL, se ainda não tiver feito isso.</li>
-    <li>Após a instalação, crie um banco de dados para a API.</li>
-</ol>
-
-<br>
-
-<h2>Configuração das Variáveis de Ambiente</h2>
-
-<p>Para configurar corretamente as variáveis de ambiente necessárias para o build do projeto sem remover as variáveis do arquivo de configuração <strong>'application.properties'</strong>, siga estas etapas:</p>
-<br>
-
-<ol>
-    <li>Abra as configurações de variáveis de ambiente do seu ambiente de desenvolvimento ou IDE.</li>
-    <li>Adicione as seguintes variáveis de ambiente, substituindo os valores pelos específicos do seu banco de dados:</li>
-</ol>
-
-<br>
-
-<pre><code>
-DB_JDBC_URL=jdbc:mysql://localhost:8081/seu_banco_de_dados
-DB_USER=seu_usuario
-DB_PASSWORD=sua_senha
-</code></pre>
-
-<br>
-
-<p>Certifique-se de que as variáveis de ambiente estejam definidas com os valores corretos no seu ambiente de desenvolvimento antes de executar o build do projeto. Essas variáveis permitirão que o projeto se conecte ao banco de dados corretamente durante o processo de build.</p>
-
-<br>
-
-<h2>Diagrama de Classes e Services</h2>
-
-![O diagrama apresenta duas entidades fundamentais para a API de gerenciamento de cardápio: a classe Comida e o serviço CardapioService](images/diagrama.png)
